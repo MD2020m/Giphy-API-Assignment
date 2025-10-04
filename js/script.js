@@ -1,1 +1,1 @@
-console.log("script.js loaded");
+let url = "https://api.giphy.com/v1/gifs/search?api_key=TqpiFQIS5QLzlroUSsLz2vjTZDOFmgzF&q=Puppy&limit=25&offset=0&rating=g&lang=en&bundle=messaging_non_clips"
