@@ -26,16 +26,10 @@ async function fetchGif(searchString) {
     const imgs = data.data;
     console.log(imgs);
 
+    // Remove previous gifs from gif container on each new search
+    gifContainer.innerHTML = "";
+
     imgs.forEach(function(gif) {
-        //let gifURL = gif.url;
         gifContainer.innerHTML += `<img src=${gif.images.original.url} class = "col-3 mb-3">`;
     })
 }
-
-
-
-
-/*searchBar.addEventListener("keyup", function(srchEvnt) {
-    const searchStr = srchEvnt.target.value;
-    console.log("The current value of the search bar is " + searchStr)
-})*/
