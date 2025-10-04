@@ -1,22 +1,35 @@
-//let url = "https://api.giphy.com/v1/gifs/search?api_key=TqpiFQIS5QLzlroUSsLz2vjTZDOFmgzF&q=Puppy&limit=25&offset=0&rating=g&lang=en&bundle=messaging_non_clips"
-
-let searchBar = document.querySelector("#search-input")
-
-let searchBtn = document.getElementById("fetch-gif-btn")
+// Store search bar text input element in a variable
+let searchBar = document.querySelector("#search-input");
+// Store fetch gif button element in a variable
+let searchBtn = document.getElementById("fetch-gif-btn");
+// Store output container in a variable
+let gifContainer = document.getElementById("gif-container");
 
 // Add event listener to searchBtn to make the API call
-searchBtn.addEventListener("click", function() {
+searchBtn.addEventListener("click", async function() {
     let searchStr = searchBar.value; //Get current text input from search bar
-    if (searchStr = null) {
+    console.log(searchStr);
+    // If search bar is empty, search for 'Puppy' by default
+    if (searchStr == "") {
         searchStr = "Puppy"
     }
-
-    
+    console.log(searchStr)
+    // Call fetchGif function with searchGif as argument
+    // Save returned image in image varaiable
+    let image = fetchGif(searchStr);    
 })
 
 async function fetchGif(searchString) {
-    let url = ("https://api.giphy.com/v1/gifs/search?api_key=TqpiFQIS5QLzlroUSsLz2vjTZDOFmgzF&q=" 
-                + searchString + "&limit=25&offset=0&rating=g&lang=en&bundle=messaging_non_clips");
+    let APIurl = `https://api.giphy.com/v1/gifs/search?api_key=TqpiFQIS5QLzlroUSsLz2vjTZDOFmgzF&q=${searchString}&limit=25&offset=0&rating=g&lang=en&bundle=messaging_non_clips`;
+    const response = await fetch(APIurl);
+    const data = await response.json();
+    const imgs = data.data;
+    console.log(imgs);
+
+    imgs.forEach(function(gif) {
+        //let gifURL = gif.url;
+        gifContainer.innerHTML += `<img src=${gif.images.original.url} class = "col-3 mb-3">`;
+    })
 }
 
 
